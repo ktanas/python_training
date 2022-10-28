@@ -1,1 +1,1 @@
-# python_training
+# Repository for Python training - Oct 2022 - Jan 2023
