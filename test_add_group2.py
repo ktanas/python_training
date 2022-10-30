@@ -27,19 +27,19 @@ class GroupAddTest3(unittest.TestCase):
         # Create a new group
         self.create_new_group(wd, group_name="Group1", header_name="Header1", footer_name="Footer1")
 
-        # Check if our new group has been created
-        self.check_if_new_group_was_created(wd)
+        # Return to group page
+        self.return_to_group_page(wd)
 
         # Create a new group
         self.create_new_group(wd, group_name="", header_name="", footer_name="")
 
-        # Check if our new group has been created
-        self.check_if_new_group_was_created(wd)
+        # Return to group page
+        self.return_to_group_page(wd)
 
         # Logout
         self.logout(wd)
 
-    def check_if_new_group_was_created(self, wd):
+    def return_to_group_page(self, wd):
         wd.find_element("link text", "group page").click()
 
     def logout(self, wd):

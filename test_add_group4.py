@@ -5,7 +5,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
 
-class GroupAddTest3(unittest.TestCase):
+
+class GroupAddTest4(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
@@ -13,7 +14,7 @@ class GroupAddTest3(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_group_add_test2(self):
+    def test_group_add_test4(self):
         # Open the AddressBook page
         wd = self.wd
         self.open_home_page(wd)
@@ -26,19 +27,19 @@ class GroupAddTest3(unittest.TestCase):
         # Create a new group
         self.create_new_group(wd, Group(group_name="Group1", header_name="Header1", footer_name="Footer1"))
 
-        # Check if our new group has been created
-        self.check_if_new_group_was_created(wd)
+        # Return to group page
+        self.return_to_group_page(wd)
 
         # Create a new group
         self.create_new_group(wd, Group(group_name="", header_name="", footer_name=""))
 
-        # Check if our new group has been created
-        self.check_if_new_group_was_created(wd)
+        # Return to group page
+        self.return_to_group_page(wd)
 
         # Logout
         self.logout(wd)
 
-    def check_if_new_group_was_created(self, wd):
+    def return_to_group_page(self, wd):
         wd.find_element("link text", "group page").click()
 
     def logout(self, wd):
