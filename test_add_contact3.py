@@ -12,7 +12,7 @@ def app(request):
     return fixture
 
 
-def test_add_contact(app):
+def test_add_contact3(app):
 
     con = Contact(firstname="John",
                   middlename="Paul",
@@ -121,23 +121,23 @@ def test_add_empty_contact(app):
 
     app.go_to_new_contact_editor_page()
 
-    app.enter_contact_personal_data(con)
+#    app.enter_contact_personal_data(con)
 
-    app.enter_contact_photo(con)
+#    app.enter_contact_photo(con)
 
-    app.enter_contact_company_data(con)
+#    app.enter_contact_company_data(con)
 
-    app.enter_contact_phones(con)
+#    app.enter_contact_phones(con)
 
-    app.enter_contact_email_addresses(con)
+#    app.enter_contact_email_addresses(con)
 
-    app.enter_contact_home_page(con)
+#    app.enter_contact_home_page(con)
 
-    app.enter_contract_dates(con)
+#    app.enter_contract_dates(con)
 
-    app.enter_contact_group(con)
+#    app.enter_contact_group(con)
 
-    app.enter_contact_extra_data(con)
+#    app.enter_contact_extra_data(con)
 
     app.finalize_new_contact_addition()
 

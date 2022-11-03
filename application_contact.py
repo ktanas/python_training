@@ -47,7 +47,7 @@ class Application:
         wd.find_element("name", "nickname").clear()
         wd.find_element("name", "nickname").send_keys("%s" % contact.nickname)
 
-    def enter_contact_photo(self, wd, contact):
+    def enter_contact_photo(self, contact):
         wd = self.wd
         wd.find_element("name", "photo").clear()
         wd.find_element("name", "photo").send_keys("%s" % contact.photo_file_location)
