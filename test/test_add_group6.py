@@ -11,14 +11,22 @@ def app(request):
     return fixture
 
 
-def test_group_add_test5(app):
+def test_add_group(app):
     # Login to 'Addressbook' as 'admin'
     app.login(username="admin", password="secret")
 
     # Create a new group
     app.create_new_group(Group(group_name="Group1", header_name="Header1", footer_name="Footer1"))
 
-    # Create a second, empty group
+    # Logout
+    app.logout()
+
+
+def test_add_empty_group(app):
+    # Login to 'Addressbook' as 'admin'
+    app.login(username="admin", password="secret")
+
+    # Create an empty group
     app.create_new_group(Group(group_name="", header_name="", footer_name=""))
 
     # Logout
