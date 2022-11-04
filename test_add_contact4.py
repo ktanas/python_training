@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 import pytest
 
 from model.contact import *
@@ -18,7 +18,7 @@ def test_add_contact4(app):
                   middlename="Paul",
                   lastname="Smith",
                   nickname="Tiger",
-                  photo_file_location="C:\\users\\ktana\\PyCharmProjects\\python_training\\aircraft_engine.JPG",
+                  photo_file_location="/aircraft_engine.jpg",
                   title="Senior Production Engineer",
                   company="J&S Machinery Inc.",
                   address="123 White Street\n00-123 Chicago, Illinois\nUnited States",

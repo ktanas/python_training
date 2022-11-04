@@ -115,3 +115,51 @@ class ContactDataHelper:
     def finalize_new_contact_addition(self):
         wd = self.app.wd
         wd.find_element("xpath", "//div[@id='content']/form/input[21]").click()
+
+    def modify_initialize(self):
+        # Open page containing list of contacts
+        wd = self.app.wd
+        self.app.open_contact_home_page()
+
+        # Select the first contact in the contact list
+        wd.find_element("name", "selected[]").click()
+
+        # Click on the edit icon (pencil) for the first contact
+        wd.find_element("xpath", "//img[@alt='Edit']").click()
+
+    def modify_first_name(self, new_first_name):
+        # Modify the contact's first name to the specified value
+        # This method assumes that we are already on the contact edition page
+        wd = self.app.wd
+        wd.find_element("name", "firstname").click()
+        wd.find_element("name", "firstname").clear()
+        wd.find_element("name", "firstname").send_keys(new_first_name)
+
+    def modify_last_name(self, new_last_name):
+        # Modify the contact's last name to the specified value
+        # This method assumes that we are already on the contact edition page
+        wd = self.app.wd
+        wd.find_element("name", "lastname").click()
+        wd.find_element("name", "lastname").clear()
+        wd.find_element("name", "lastname").send_keys(new_last_name)
+
+    def modify_birthday(self, new_day, new_month, new_year):
+        wd = self.app.wd
+        wd.find_element("name", "bday").click()
+        Select(wd.find_element("name", "bday")).select_by_visible_text("%s" % new_day)
+        wd.find_element("xpath", "//option[@value='" + new_day + "']").click()
+        wd.find_element("name", "bmonth").click()
+        Select(wd.find_element("name", "bmonth")).select_by_visible_text("%s" % new_month)
+        wd.find_element("xpath", "//option[@value='"+ new_month +"']").click()
+        wd.find_element("name", "byear").click()
+        wd.find_element("name", "byear").clear()
+        wd.find_element("name", "byear").send_keys("%s" % new_year)
+
+    def modify_finalize(self):
+        # Click on the "Update" button after finishing modification of the contact's data
+        wd = self.app.wd
+        wd.find_element("name", "update").click()
+
+    def return_to_home_page(self):
+        wd = self.app.wd
+        wd.find_element("link text", "home page").click()

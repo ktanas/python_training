@@ -21,6 +21,10 @@ class Application:
         wd.get("http://localhost/addressbook/")
         return wd
 
+    def open_contact_home_page(self):
+        wd = self.wd
+        wd.find_element("link text", "home").click()
+
     def go_to_new_contact_editor_page(self):
         wd = self.wd
         wd.find_element("link text", "add new").click()

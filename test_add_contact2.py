@@ -5,8 +5,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
 
-from contact_utilities import *
-from contact import *
+from utilities.contact_utilities import *
+from model.contact import *
 
 
 class AddContact(unittest.TestCase):
