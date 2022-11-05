@@ -160,6 +160,17 @@ class ContactDataHelper:
         wd = self.app.wd
         wd.find_element("name", "update").click()
 
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # Select first contact in the contact list
+        wd.find_element("name", "selected[]").click()
+        # Delete the selected contact
+        wd.find_element("name","delete").click()
+        # Confirm deletion of the contact and click 'OK'
+        self.assertRegex(self.close_alert_and_get_its_text(), r"^Delete 1 addresses[\s\S]$")
+        # Return to group page
+        self.return_to_home_page()
+
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element("link text", "home page").click()

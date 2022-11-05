@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from fixture.session import SessionHelper
+from fixture.contact import ContactDataHelper
 from fixture.group import GroupHelper
 
 
@@ -15,10 +16,20 @@ class Application:
         self.accept_next_alert = True
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
+        self.contact_data = ContactDataHelper(self)
 
     def open_home_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
+        return wd
+
+    def open_contact_home_page(self):
+        wd = self.wd
+        wd.find_element("link text", "home").click()
+
+    def go_to_new_contact_editor_page(self):
+        wd = self.wd
+        wd.find_element("link text", "add new").click()
 
     def is_element_present(self, how, what):
         try:

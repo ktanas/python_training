@@ -5,8 +5,10 @@ class SessionHelper:
 
     def login(self, username, password):
         wd = self.app.wd
+
         # Open home page - 'Addressbook'
         self.app.open_home_page()
+
         # Login to 'Addressbook' as 'admin'
         wd.find_element("name", "user").clear()
         wd.find_element("name", "user").send_keys("%s" % username)

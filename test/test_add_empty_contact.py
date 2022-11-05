@@ -1,14 +1,4 @@
-import pytest
-
 from model.contact import *
-from fixture.application_contact import Application
-
-
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.tear_down)
-    return fixture
 
 
 def test_add_empty_contact(app):
@@ -40,9 +30,9 @@ def test_add_empty_contact(app):
                   extra_phone="",
                   notes="")
 
-    app.open_home_page()
+    # app.open_home_page()
 
-    app.session.login(user="admin", password="secret")
+    app.session.login(username="admin", password="secret")
 
     app.open_contact_home_page()
 

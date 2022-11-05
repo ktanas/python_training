@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
-import pytest
 
 from model.contact import *
-from fixture.application_contact import Application
 
 
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.tear_down)
-    return fixture
-
-
-def test_add_contact5(app):
+def test_add_contact(app):
 
     con = Contact(firstname="John",
                   middlename="Paul",
@@ -41,9 +32,9 @@ def test_add_contact5(app):
                   extra_phone="the same address as above",
                   notes="A nice record to test in Python!")
 
-    app.open_home_page()
+    # app.open_home_page()
 
-    app.session.login(user="admin", password="secret")
+    app.session.login(username="admin", password="secret")
 
     app.open_contact_home_page()
 
