@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 from fixture.session import SessionHelper
-from fixture.contact import ContactDataHelper
+from fixture.contact import ContactHelper
 from fixture.group import GroupHelper
 
 
@@ -16,7 +16,7 @@ class Application:
         self.accept_next_alert = True
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
-        self.contact_data = ContactDataHelper(self)
+        self.contact_data = ContactHelper(self)
 
     def open_home_page(self):
         wd = self.wd

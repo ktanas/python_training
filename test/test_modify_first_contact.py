@@ -6,8 +6,6 @@ def test_modify_first_contact(app):
     # This is not a real-life project, just an exercise made during training
     # Implementing methods to change every possible data field in the contact would take way too much time
 
-    # app.open_home_page()
-
     app.session.login(username="admin", password="secret")
 
     app.open_contact_home_page()

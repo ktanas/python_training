@@ -1,8 +1,10 @@
+from selenium.webdriver.support import expected_conditions, wait
+
 from utilities.contact_utilities import *
 from selenium.webdriver.support.ui import Select
 
 
-class ContactDataHelper:
+class ContactHelper:
 
     def __init__(self, app):
         self.app = app
@@ -165,12 +167,21 @@ class ContactDataHelper:
         # Select first contact in the contact list
         wd.find_element("name", "selected[]").click()
         # Delete the selected contact
-        wd.find_element("name","delete").click()
-        # Confirm deletion of the contact and click 'OK'
-        self.assertRegex(self.close_alert_and_get_its_text(), r"^Delete 1 addresses[\s\S]$")
-        # Return to group page
-        self.return_to_home_page()
+        wd.find_element("xpath", "//input[@value='Delete']").click()
+
+        # Confirm deletion of the contact and click 'OK' which is the alert acceptance button
+        alert = wd.switch_to.alert
+
+        if alert.text == "Delete 1 addresses?":
+            alert.accept()
 
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element("link text", "home page").click()
+
+    def return_to_home_page2(self):
+        wd = self.app.wd
+        wd.find_element("link text", "home").click()
+        # Note that after 'delete contact' operation, no additional button returning to home page appears on
+        # the contact page. It is therefore necessary to use the generic 'home' link present on the upper toolbar
+        # of the Addressbook page.
