@@ -9,8 +9,5 @@ def test_add_group(app):
     # Create a new group
     app.group.create(Group(group_name="Group1", header_name="Header1", footer_name="Footer1"))
 
-    # Return to the group page
-    # app.group.return_to_group_page()
-
     # Logout
     app.session.logout()

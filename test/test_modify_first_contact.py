@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from model.contact import *
+
 
 def test_modify_first_contact(app):
 
@@ -6,17 +8,40 @@ def test_modify_first_contact(app):
     # This is not a real-life project, just an exercise made during training
     # Implementing methods to change every possible data field in the contact would take way too much time
 
+    # Edit the contact data
+
+    con = Contact(firstname="Anne",
+                  lastname="Jones",
+                  birth_day="31",
+                  birth_month="December",
+                  birth_year="1999")
+
     app.session.login(username="admin", password="secret")
 
-    app.open_contact_home_page()
-
-    # Edit the contact data
     app.contact_data.modify_initialize()
-    app.contact_data.modify_first_name("Robert")
-    app.contact_data.modify_last_name("Lewandowski")
-    app.contact_data.modify_birthday("21", "August", "1988")
+
+    app.contact_data.enter_contact_personal_data(con)
+    #                                         firstname="Anne",
+    #                                         lastname="Jones",
+
+    app.contact_data.enter_contact_photo(con)
+
+    app.contact_data.enter_contact_company_data(con)
+
+    app.contact_data.enter_contact_phones(con)
+
+    app.contact_data.enter_contact_email_addresses(con)
+
+    app.contact_data.enter_contact_home_page(con)
+
+    app.contact_data.enter_contract_dates(con)
+    #                                  birth_day="31",
+    #                                  birth_month="December",
+    #                                  birth_year="1999",
+    app.contact_data.enter_contact_group(con)
+
+    app.contact_data.enter_contact_extra_data(con)
+
     app.contact_data.modify_finalize()
 
-    # Return to page with contacts, then logout
-    app.contact_data.return_to_home_page()
     app.session.logout()
