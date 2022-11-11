@@ -9,7 +9,7 @@ class SessionHelper:
         # Open home page - 'Addressbook'
         self.app.open_home_page()
 
-        # Login to 'Addressbook' as 'admin'
+        # Login to 'Addressbook' page
         wd.find_element("name", "user").clear()
         wd.find_element("name", "user").send_keys("%s" % username)
         wd.find_element("name", "pass").click()
@@ -41,4 +41,4 @@ class SessionHelper:
                 return
             else:
                 self.logout()
-        self.login(username,password)
+        self.login(username, password)

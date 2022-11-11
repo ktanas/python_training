@@ -80,7 +80,7 @@ class GroupHelper:
         self.open_groups_page()
         self.select_first_group()
         # Delete the selected group
-        wd.find_element("name","delete").click()
+        wd.find_element("name", "delete").click()
         # Return to group page
         self.return_to_group_page()
 
@@ -89,4 +89,7 @@ class GroupHelper:
         # Select first group in the group list
         wd.find_element("name", "selected[]").click()
 
-
+    def count(self):
+        # Return number of currently existing groups
+        wd = self.app.wd
+        return len(wd.find_elements("name", "selected[]"))

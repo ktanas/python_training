@@ -103,6 +103,11 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element("name", "update").click()
 
+    def count(self):
+        # Return number of currently existing contacts
+        wd = self.app.wd
+        return len(wd.find_elements("name", "selected[]"))
+
     def delete_first_contact(self):
         wd = self.app.wd
         # Select first contact in the contact list
