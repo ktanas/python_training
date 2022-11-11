@@ -16,8 +16,6 @@ def test_modify_first_contact(app):
                   birth_month="December",
                   birth_year="1999")
 
-    app.session.login(username="admin", password="secret")
-
     app.contact_data.modify_initialize()
 
     app.contact_data.enter_contact_personal_data(con)
@@ -43,5 +41,3 @@ def test_modify_first_contact(app):
     app.contact_data.enter_contact_extra_data(con)
 
     app.contact_data.modify_finalize()
-
-    app.session.logout()

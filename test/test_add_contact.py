@@ -32,10 +32,6 @@ def test_add_contact(app):
                   extra_phone="the same address as above",
                   notes="A nice record to test in Python!")
 
-    # app.open_home_page()
-
-    app.session.login(username="admin", password="secret")
-
     app.open_contact_home_page()
 
     app.go_to_new_contact_editor_page()
@@ -76,6 +72,5 @@ def test_add_contact(app):
 #                                      extra_phone="the same address as above",
 #                                      notes="A nice record to test in Python!")
     app.contact_data.finalize_new_contact_addition()
-    app.session.logout()
 
 

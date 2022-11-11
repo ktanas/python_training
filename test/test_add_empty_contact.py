@@ -30,10 +30,6 @@ def test_add_empty_contact(app):
                   extra_phone="",
                   notes="")
 
-    # app.open_home_page()
-
-    app.session.login(username="admin", password="secret")
-
     app.open_contact_home_page()
 
     app.go_to_new_contact_editor_page()
@@ -41,5 +37,3 @@ def test_add_empty_contact(app):
     app.contact_data.finalize_new_contact_addition()
 
     app.contact_data.return_to_home_page()
-
-    app.session.logout()
