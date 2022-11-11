@@ -10,7 +10,7 @@ class Application:
 
     def __init__(self):
         self.wd = webdriver.Firefox()
-        self.wd.implicitly_wait(10)
+        # self.wd.implicitly_wait(10)
         self.base_url = "https://www.google.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
@@ -25,6 +25,10 @@ class Application:
         except:
             return False
 
+    def delay(self, time):
+        wd = self.wd
+        wd.implicitly_wait(time)
+
     def open_home_page(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
@@ -32,7 +36,10 @@ class Application:
 
     def open_contact_home_page(self):
         wd = self.wd
-        wd.find_element("link text", "home").click()
+        if (len(wd.find_elements("link text", "Send e-Mail")) == 0
+            or len(wd.find_elements("link text", "Delete")) == 0
+            or len(wd.find_elements("link text", "Add to")) == 0):
+                wd.find_element("link text", "home").click()
 
     def go_to_new_contact_editor_page(self):
         wd = self.wd

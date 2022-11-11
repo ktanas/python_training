@@ -32,6 +32,11 @@ def test_add_contact(app):
                   extra_phone="the same address as above",
                   notes="A nice record to test in Python!")
 
+    # This delay is necessary to give the application enough time to load.
+    # Without this delay, this particular test fails, because the 'home' button on the upper toolbar of the
+    # 'Addressbook' page is not visible when 'app.open_contact_home_page()' function is performed.
+    app.delay(1)
+
     app.open_contact_home_page()
 
     app.go_to_new_contact_editor_page()

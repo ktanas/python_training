@@ -11,5 +11,7 @@ def test_delete_first_contact(app):
 
     app.contact_data.delete_first_contact()
 
+    app.open_contact_home_page()
+
     # Return to page with contacts, then logout
-    app.contact_data.return_to_home_page2()
+    #app.contact_data.return_to_home_page2()

@@ -124,10 +124,3 @@ class ContactHelper:
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element("link text", "home page").click()
-
-    def return_to_home_page2(self):
-        wd = self.app.wd
-        wd.find_element("link text", "home").click()
-        # Note that after 'delete contact' operation, no additional button returning to home page appears on
-        # the contact page. It is therefore necessary to use the generic 'home' link present on the upper toolbar
-        # of the Addressbook page.
