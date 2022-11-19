@@ -5,6 +5,8 @@ from model.contact import *
 
 def test_add_contact(app):
 
+    old_contacts = app.contact_data.get_contact_list()
+
     con = Contact(firstname="John",
                   middlename="Paul",
                   lastname="Smith",
@@ -78,4 +80,11 @@ def test_add_contact(app):
 #                                      notes="A nice record to test in Python!")
     app.contact_data.finalize_new_contact_addition()
 
+#################################################
+    new_contacts = app.contact_data.get_contact_list()
 
+    assert len(new_contacts) == len(old_contacts) + 1
+
+    old_contacts.append(con)
+
+    assert sorted(old_contacts, key=Contact.id_or_max) == sorted (new_contacts, key=Contact.id_or_max)

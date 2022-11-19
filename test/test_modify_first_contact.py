@@ -15,6 +15,8 @@ def test_modify_first_contact(app):
     # This is not a real-life project, just an exercise made during training
     # Implementing methods to change every possible data field in the contact would take way too much time
 
+    old_contacts = app.contact_data.get_contact_list()
+
     # Edit the contact data
 
     con = Contact(firstname="Anne",
@@ -22,6 +24,8 @@ def test_modify_first_contact(app):
                   birth_day="31",
                   birth_month="December",
                   birth_year="1999")
+
+    con.id = old_contacts[0].id
 
     app.contact_data.modify_initialize()
 
@@ -48,3 +52,11 @@ def test_modify_first_contact(app):
     app.contact_data.enter_contact_extra_data(con)
 
     app.contact_data.modify_finalize()
+
+    new_contacts = app.contact_data.get_contact_list()
+    assert len(new_contacts) == len(old_contacts)
+    old_contacts.append(con)
+
+    old_contacts[0] = con
+
+    assert sorted(old_contacts, key=Contact.id_or_max) == sorted (new_contacts, key=Contact.id_or_max)

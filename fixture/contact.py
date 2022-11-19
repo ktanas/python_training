@@ -1,5 +1,6 @@
 from utilities.contact_utilities import *
 from selenium.webdriver.support.ui import Select
+from model.contact import Contact
 
 
 class ContactHelper:
@@ -124,3 +125,21 @@ class ContactHelper:
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element("link text", "home page").click()
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.app.open_contact_home_page()
+        contact_list = []
+        for element in wd.find_elements("name", "entry"):
+            #text = element.text
+            selectStr = element.find_element("name", "selected[]").get_attribute("title")
+            print("selectStr="+selectStr)
+            cutStr = selectStr[selectStr.find('(')+1:selectStr.find(')')]
+            print("cutStr="+cutStr)
+            firstNameStr = cutStr[0:cutStr.find(' ')]
+            lastNameStr = cutStr[cutStr.find(' ')+1:len(cutStr)]
+            print("firstNameStr="+firstNameStr)
+            print("lastNameStr="+lastNameStr)
+
+            contact_list.append(Contact(firstname=firstNameStr, lastname=lastNameStr, id=id))
+        return contact_list
