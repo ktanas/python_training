@@ -10,7 +10,7 @@ class Application:
 
     def __init__(self):
         self.wd = webdriver.Firefox()
-        # self.wd.implicitly_wait(10)
+        self.wd.implicitly_wait(10)
         self.base_url = "https://www.google.com/"
         self.verificationErrors = []
         self.accept_next_alert = True
