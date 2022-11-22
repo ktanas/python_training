@@ -16,8 +16,8 @@ class Group:
         # return self.id == other.id and self.group_name == other.group_name
         return (self.id is None or other.id is None) or (self.id == other.id and self.group_name == other.group_name)
 
-    def id_or_max(self):
-        if self.id:
-            return int(self.id)
-        else:
-            return maxsize
+    # def id_or_max(self):
+    #     if self.id:
+    #         return int(self.id)
+    #     else:
+    #         return maxsize
