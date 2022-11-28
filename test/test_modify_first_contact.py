@@ -55,7 +55,6 @@ def test_modify_first_contact(app):
 
     new_contacts = app.contact_data.get_contact_list()
     assert len(new_contacts) == len(old_contacts)
-    old_contacts.append(con)
 
     old_contacts[0] = con
 

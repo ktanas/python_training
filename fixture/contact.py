@@ -131,15 +131,12 @@ class ContactHelper:
         self.app.open_contact_home_page()
         contact_list = []
         for element in wd.find_elements("name", "entry"):
-            #text = element.text
+
             selectStr = element.find_element("name", "selected[]").get_attribute("title")
-            # print("selectStr="+selectStr)
             cutStr = selectStr[selectStr.find('(')+1:selectStr.find(')')]
-            # print("cutStr="+cutStr)
             firstNameStr = cutStr[0:cutStr.find(' ')]
             lastNameStr = cutStr[cutStr.find(' ')+1:len(cutStr)]
-            # print("firstNameStr="+firstNameStr)
-            # print("lastNameStr="+lastNameStr)
+            id = element.find_element("name", "selected[]").get_attribute("value")
 
             contact_list.append(Contact(firstname=firstNameStr, lastname=lastNameStr, id=id))
         return contact_list
