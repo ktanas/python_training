@@ -87,6 +87,7 @@ class ContactHelper:
     def finalize_new_contact_addition(self):
         wd = self.app.wd
         wd.find_element("xpath", "//div[@id='content']/form/input[21]").click()
+        self.contact_cache = None
 
     def modify_initialize(self):
         # Open page containing list of contacts
@@ -103,6 +104,7 @@ class ContactHelper:
         # Click on the "Update" button after finishing modification of the contact's data
         wd = self.app.wd
         wd.find_element("name", "update").click()
+        self.contact_cache = None
 
     def count(self):
         # Return number of currently existing contacts
@@ -121,22 +123,26 @@ class ContactHelper:
 
         if alert.text == "Delete 1 addresses?":
             alert.accept()
+            self.contact_cache = None
 
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element("link text", "home page").click()
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.app.open_contact_home_page()
-        contact_list = []
-        for element in wd.find_elements("name", "entry"):
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.open_contact_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements("name", "entry"):
 
-            selectStr = element.find_element("name", "selected[]").get_attribute("title")
-            cutStr = selectStr[selectStr.find('(')+1:selectStr.find(')')]
-            firstNameStr = cutStr[0:cutStr.find(' ')]
-            lastNameStr = cutStr[cutStr.find(' ')+1:len(cutStr)]
-            id = element.find_element("name", "selected[]").get_attribute("value")
+                selectStr = element.find_element("name", "selected[]").get_attribute("title")
+                cutStr = selectStr[selectStr.find('(')+1:selectStr.find(')')]
+                firstNameStr = cutStr[0:cutStr.find(' ')]
+                lastNameStr = cutStr[cutStr.find(' ')+1:len(cutStr)]
+                id = element.find_element("name", "selected[]").get_attribute("value")
 
-            contact_list.append(Contact(firstname=firstNameStr, lastname=lastNameStr, id=id))
-        return contact_list
+                self.contact_cache.append(Contact(firstname=firstNameStr, lastname=lastNameStr, id=id))
+        return list(self.contact_cache)
