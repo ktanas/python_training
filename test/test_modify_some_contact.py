@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 from model.contact import *
+from random import randrange
 
 
 def test_modify_first_contact(app):
@@ -17,17 +17,19 @@ def test_modify_first_contact(app):
 
     old_contacts = app.contact_data.get_contact_list()
 
+    index = randrange(len(old_contacts))
+
     # Edit the contact data
 
-    con = Contact(firstname="Anne",
-                  lastname="Jones",
-                  birth_day="31",
-                  birth_month="December",
-                  birth_year="1999")
+    con = Contact(firstname="Peter",
+                  lastname="Wilson",
+                  birth_day="1",
+                  birth_month="January",
+                  birth_year="1961")
 
-    con.id = old_contacts[0].id
+    con.id = old_contacts[index].id
 
-    app.contact_data.modify_initialize(0)
+    app.contact_data.modify_initialize(index)
 
     app.contact_data.enter_contact_personal_data(con)
     #                                         firstname="Anne",
@@ -56,6 +58,6 @@ def test_modify_first_contact(app):
     new_contacts = app.contact_data.get_contact_list()
     assert len(new_contacts) == len(old_contacts)
 
-    old_contacts[0] = con
+    old_contacts[index] = con
 
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted (new_contacts, key=Contact.id_or_max)

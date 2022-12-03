@@ -89,13 +89,13 @@ class ContactHelper:
         wd.find_element("xpath", "//div[@id='content']/form/input[21]").click()
         self.contact_cache = None
 
-    def modify_initialize(self):
+    def modify_initialize(self, index):
         # Open page containing list of contacts
         wd = self.app.wd
         self.app.open_contact_home_page()
 
-        # Select the first contact in the contact list
-        wd.find_element("name", "selected[]").click()
+        # Select contact with the given index in the contact list
+        wd.find_elements("name", "selected[]")[index].click()
 
         # Click on the edit icon (pencil) for the first contact
         wd.find_element("xpath", "//img[@alt='Edit']").click()
@@ -111,10 +111,10 @@ class ContactHelper:
         wd = self.app.wd
         return len(wd.find_elements("name", "selected[]"))
 
-    def delete_first_contact(self):
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
-        # Select first contact in the contact list
-        wd.find_element("name", "selected[]").click()
+        # Select contact with the given index from the contact list
+        wd.find_elements("name", "selected[]")[index].click()
         # Delete the selected contact
         wd.find_element("xpath", "//input[@value='Delete']").click()
 
@@ -124,6 +124,9 @@ class ContactHelper:
         if alert.text == "Delete 1 addresses?":
             alert.accept()
             self.contact_cache = None
+
+    def delete_first_contact(self):
+        self.delete_contact_by_index(0)
 
     def return_to_home_page(self):
         wd = self.app.wd
@@ -145,4 +148,13 @@ class ContactHelper:
                 id = element.find_element("name", "selected[]").get_attribute("value")
 
                 self.contact_cache.append(Contact(firstname=firstNameStr, lastname=lastNameStr, id=id))
+
+                #cells = wd.find_elements("tag name", "td")
+                #firstname = cells[2].text
+
+                #print("firstname="+cells[2].text+"X")
+                #print("lastname="+cells[1].text+"X")
+
+
+                #self.contact_cache.append(Contact(firstname=cells[2].text, lastname=cells[1].text, id=id))
         return list(self.contact_cache)

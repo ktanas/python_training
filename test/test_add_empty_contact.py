@@ -43,9 +43,9 @@ def test_add_empty_contact(app):
 
     app.contact_data.finalize_new_contact_addition()
 
-    app.contact_data.return_to_home_page()
-
     new_contacts = app.contact_data.get_contact_list()
+
+    #app.contact_data.return_to_home_page()
 
     assert len(new_contacts) == len(old_contacts) + 1
 

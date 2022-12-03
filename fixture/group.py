@@ -48,13 +48,15 @@ class GroupHelper:
         self.change_field_value("group_header", group.header_name)
         self.change_field_value("group_footer", group.footer_name)
 
-    def modify_first_group(self, new_group_data):
+    def modify_group_by_index(self, index, new_group_data):
         wd = self.app.wd
+
+        print("modify_group_by_index: index="+str(index))
 
         # Open page containing list of groups
         self.open_groups_page()
-        # Select the first group from list
-        self.select_first_group()
+        # Select group with the given index on the group list
+        self.select_group_by_index(index)
         # Open modification form
         wd.find_element("name", "edit").click()
         # Fill group form
@@ -65,36 +67,45 @@ class GroupHelper:
         self.return_to_group_page()
         self.group_cache = None
 
-    def modify_initialize(self):
+    def modify_first_group(self, new_group_data):
+        self.modify_group_by_index(0, new_group_data)
+
+    def modify_initialize(self, index):
         # Open page containing list of groups
         wd = self.app.wd
         self.open_groups_page()
         # Find group to modify - click on the group with given name
         # wd.find_element("title", "Select ("+ group_name +")").click()
-        wd.find_element("name", "selected[]").click()
+        wd.find_elements("name", "selected[]")[index].click()
         # Click on the 'Edit group' button
-        wd.find_element("name", "edit").click()
+        wd.find_elements("name", "edit")[index].click()
 
     def modify_finalize(self):
         # Click on the "Update" button after finishing modification of the group's data
         wd = self.app.wd
         wd.find_element("name", "update").click()
 
-    def delete_first_group(self):
+    def delete_group_by_index(self, index):
         # Open groups page
         wd = self.app.wd
         self.open_groups_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         # Delete the selected group
         wd.find_element("name", "delete").click()
         # Return to group page
         self.return_to_group_page()
         self.group_cache = None
 
-    def select_first_group(self):
+    def delete_first_group(self):
+        self.delete_group_by_index(0)
+
+    def select_group_by_index(self, index):
         wd = self.app.wd
-        # Select first group in the group list
-        wd.find_element("name", "selected[]").click()
+        # Select group with the given index from the group list
+        wd.find_elements("name", "selected[]")[index].click()
+
+    def select_first_group(self):
+        self.select_group_by_index(0)
 
     def count(self):
         # Return number of currently existing groups
