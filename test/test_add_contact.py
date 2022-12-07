@@ -65,7 +65,7 @@ def test_add_contact(app):
 #                                           email3="abc123@abc.com")
     app.contact_data.enter_contact_home_page(con)
 #                                     home_page="https://www.jsmachinery.com/~jsmith")
-    app.contact_data.enter_contract_dates(con)
+    app.contact_data.enter_contact_dates(con)
 #                                  birth_day="1",
 #                                  birth_month="January",
 #                                  birth_year="1970",

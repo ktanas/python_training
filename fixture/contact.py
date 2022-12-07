@@ -53,7 +53,7 @@ class ContactHelper:
     def enter_contact_home_page(self, contact):
         self.enter_text_field_value("homepage", contact.home_page)
 
-    def enter_contract_dates(self, contact):
+    def enter_contact_dates(self, contact):
         self.enter_selectable_field_value("bday", "//option[@value='" + contact.birth_day + "']", contact.birth_day)
         self.enter_selectable_field_value("bmonth", "//option[@value='" + contact.birth_month + "']", contact.birth_month)
         self.enter_text_field_value("byear", contact.birth_year)
@@ -95,10 +95,10 @@ class ContactHelper:
         self.app.open_contact_home_page()
 
         # Select contact with the given index in the contact list
-        wd.find_elements("name", "selected[]")[index].click()
+        wd.find_element("name", "selected[]").click()
 
         # Click on the edit icon (pencil) for the first contact
-        wd.find_element("xpath", "//img[@alt='Edit']").click()
+        wd.find_elements("xpath", "//img[@alt='Edit']")[index].click()
 
     def modify_finalize(self):
         # Click on the "Update" button after finishing modification of the contact's data

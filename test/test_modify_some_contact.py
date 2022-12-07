@@ -45,7 +45,7 @@ def test_modify_first_contact(app):
 
     app.contact_data.enter_contact_home_page(con)
 
-    app.contact_data.enter_contract_dates(con)
+    app.contact_data.enter_contact_dates(con)
     #                                  birth_day="31",
     #                                  birth_month="December",
     #                                  birth_year="1999",
