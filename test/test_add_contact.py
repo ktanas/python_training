@@ -31,7 +31,7 @@ def test_add_contact(app):
                   anniversary_year="1992",
                   group_name="[none]",
                   extra_address="66 Oak Avenue\n00-125 Chicago, Illinois\nUnited States",
-                  extra_phone="the same address as above",
+                  extra_phone="82828282",
                   notes="A nice record to test in Python!")
 
     # This delay is necessary to give the application enough time to load.

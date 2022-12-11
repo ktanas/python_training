@@ -30,7 +30,9 @@ class Contact:
                  extra_address=None,
                  extra_phone=None,
                  notes=None,
-                 id=None
+                 id=None,
+                 all_phones_from_home_page=None,
+                 all_emails_from_home_page=None
                  ):
         self.firstname = firstname
         self.middlename = middlename
@@ -59,9 +61,11 @@ class Contact:
         self.extra_phone = extra_phone
         self.notes = notes
         self.id = id
+        self.all_phones_from_home_page = all_phones_from_home_page
+        self.all_emails_from_home_page = all_emails_from_home_page
 
     def __repr__(self):
-        return "%s:%s" % (self.id, self.group_name)
+        return "%s:%s %s" % (self.id, self.firstname, self.lastname)
 
     def __eq__(self,other):
         # return self.id == other.id and self.firstname == other.middlename and self.lastname == other.lastname

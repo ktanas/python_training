@@ -51,7 +51,7 @@ class GroupHelper:
     def modify_group_by_index(self, index, new_group_data):
         wd = self.app.wd
 
-        print("modify_group_by_index: index="+str(index))
+        # print("modify_group_by_index: index="+str(index))
 
         # Open page containing list of groups
         self.open_groups_page()
