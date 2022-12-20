@@ -8,8 +8,7 @@ from fixture.group import GroupHelper
 
 class Application:
 
-    def __init__(self, browser="firefox", base_url="http://localhost/addressbook/", username="", password=""):
-                 #,username="admin", password="secret"):
+    def __init__(self, browser="", base_url="", username="", password=""):
         if browser == "firefox":
             self.wd = webdriver.Firefox()
         elif browser == "chrome":
