@@ -1,33 +1,10 @@
 # -*- coding: utf-8 -*-
-from model.group import Group
-import pytest
-import random
-import string
 from sys import maxsize
 
 
-def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
-    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
+def test_add_group(app, json_groups):
 
-
-testdata = [
-    # this comment should remain for teaching purposes, it is another way of defining test data
-    #[Group(group_name="", header_name="", footer_name="")] + [
-    #Group(group_name=random_string("group_name", 10),
-    #      header_name=random_string("header_name", 20),
-    #      footer_name=random_string("footer_name", 20))
-
-    Group(group_name=group_name, header_name=header_name, footer_name=footer_name)
-    for group_name in ["", random_string("group_name", 10)]
-    for header_name in ["", random_string("header_name", 20)]
-    for footer_name in ["", random_string("footer_name", 20)]
-]
-
-
-@pytest.mark.parametrize("group", testdata, ids=[repr(x) for x in testdata])
-def test_add_group(app, group):
-    pass
+    group = json_groups
 
     old_groups = app.group.get_group_list()
 
