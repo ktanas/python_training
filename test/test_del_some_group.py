@@ -9,8 +9,6 @@ def test_delete_some_group(app):
 
     old_groups = app.group.get_group_list()
     index = randrange(len(old_groups))
-    print("len(old_groups)="+str(len(old_groups)))
-    print("index="+str(index))
 
     app.group.delete_group_by_index(index)
 

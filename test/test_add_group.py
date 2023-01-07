@@ -22,8 +22,4 @@ def test_add_group(app, db, json_groups):
         else:
             return maxsize
 
-    # assert (old_groups == new_groups)
-    # assert (sorted(old_groups) == sorted(new_groups))
     assert sorted(old_groups, key=id_or_max) == sorted(new_groups, key=id_or_max)
-
-    # assert sorted(old_groups, key=Group.id_or_max) == sorted (new_groups, key=Group.id_or_max)
