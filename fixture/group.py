@@ -30,6 +30,10 @@ class GroupHelper:
         self.return_to_group_page()
         self.group_cache = None
 
+    def read_field_value(self, field_name):
+        wd = self.app.wd
+        return wd.find_element("name", field_name).text
+
     def set_field_value(self, field_name, text):
         wd = self.app.wd
         wd.find_element("name", field_name).click()
@@ -48,10 +52,32 @@ class GroupHelper:
         self.change_field_value("group_header", group.header_name)
         self.change_field_value("group_footer", group.footer_name)
 
-    def modify_group_by_index(self, index, new_group_data):
+    def read_group_by_index(self, index):
         wd = self.app.wd
 
-        # print("modify_group_by_index: index="+str(index))
+        # Open page containing list of groups
+        self.open_groups_page()
+        # Select group with the given index on the group list
+        self.select_group_by_index(index)
+        # Open modification form
+        wd.find_element("name", "edit").click()
+
+        # Read the group's data - it is necessary to enter the 'Edit' screen
+        # and click 'Update' button, without changing any of the data fields' values
+        group_name = self.read_field_value("group_name")
+        group_header = self.read_field_value("group_header")
+        group_footer = self.read_field_value("group_footer")
+
+        # Submit modification
+        wd.find_element("name", "update").click()
+        # Return to group page
+        self.return_to_group_page()
+        self.group_cache = None
+
+        return Group(group_name=group_name, header_name=group_header, footer_name=group_footer)
+
+    def modify_group_by_index(self, index, new_group_data):
+        wd = self.app.wd
 
         # Open page containing list of groups
         self.open_groups_page()
@@ -96,6 +122,17 @@ class GroupHelper:
         self.return_to_group_page()
         self.group_cache = None
 
+    def delete_group_by_id(self, id):
+        # Open groups page
+        wd = self.app.wd
+        self.open_groups_page()
+        self.select_group_by_id(id)
+        # Delete the selected group
+        wd.find_element("name", "delete").click()
+        # Return to group page
+        self.return_to_group_page()
+        self.group_cache = None
+
     def delete_first_group(self):
         self.delete_group_by_index(0)
 
@@ -103,6 +140,11 @@ class GroupHelper:
         wd = self.app.wd
         # Select group with the given index from the group list
         wd.find_elements("name", "selected[]")[index].click()
+
+    def select_group_by_id(self, id):
+        wd = self.app.wd
+        # Select group with the given id from the group list
+        wd.find_element("css selector", "input[value='%s']" % id).click()
 
     def select_first_group(self):
         self.select_group_by_index(0)

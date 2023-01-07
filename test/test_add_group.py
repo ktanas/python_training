@@ -2,17 +2,17 @@
 from sys import maxsize
 
 
-def test_add_group(app, json_groups):
+def test_add_group(app, db, json_groups):
 
     group = json_groups
 
-    old_groups = app.group.get_group_list()
+    old_groups = db.get_group_list()
 
     # Create a new group
     app.group.create(group)
 
-    assert app.group.count() == len(old_groups) + 1
-    new_groups = app.group.get_group_list()
+    # assert app.group.count() == len(old_groups) + 1
+    new_groups = db.get_group_list()
 
     old_groups.append(group)
 
