@@ -1,36 +1,53 @@
-from pytest_bdd import given, when, then
 from model.group import Group
 from sys import maxsize
 from random import randrange
+from pytest_bdd import given, when, then, parsers
 
 
-@given('a group list')
-def group_list(db):
-    return db.get_group_list()
-
-
-@given('a group with <group_name>, <header_name> and <footer_name>')
+@given(parsers.parse('a group with {group_name}, {header_name} and {footer_name}'), target_fixture='new_group')
 def new_group(group_name, header_name, footer_name):
     return Group(group_name=group_name, header_name=header_name, footer_name=footer_name)
 
 
-#@given('a group with name1, header1 and footer1')
-#def new_group():
-#    return Group(group_name="name1", header_name="header1", footer_name="footer1")
+@given('a group list', target_fixture='group_list')
+def group_list(db):
+    return db.get_group_list()
 
 
-#@given('a group with name2, header2 and footer2')
-#def new_group():
-#    return Group(group_name="name2", header_name="header2", footer_name="footer2")
+@given('a non-empty group list', target_fixture='non_empty_group_list')
+def non_empty_group_list(db, app):
+    if len(db.get_group_list()) == 0:
+        app.group.create(Group(group_name="", header_name="", footer_name=""))
+        return db.get_group_list()
 
-
-#@when('I add a new group with <name>, <header> and <footer>')
-#def add_new_group(app, name, header, footer):
-#    app.group.create(Group(group_name=name, header_name=header, footer_name=footer))
 
 @when('I add the group to the list')
 def add_new_group(app, new_group):
     app.group.create(new_group)
+
+
+@when(parsers.parse('I modify {name}, {header} and {footer} of the chosen group'), target_fixture='modify_group_data')
+def modify_group_data(app, index, new_name, new_header, new_footer):
+
+    old_groups = app.group.get_group_list()
+
+    group1 = Group(group_name=new_name, header_name=new_header, footer_name=new_footer)
+    group1.id = old_groups[index].id
+
+    app.group.modify_group_by_index(index, group1)
+
+    return app.group.get_group_list()
+
+
+@then('the new group list is equal to old group list with modified group')
+def verify_group_modified(app, non_empty_group_list, index):
+    old_groups = non_empty_group_list
+    new_groups = app.group.get_group_list()
+
+    assert len(new_groups) == len(old_groups)
+    old_groups[index] = new_groups[index]
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+
 
 @given('a non-empty group list')
 def non_empty_group_list(db, app):
@@ -40,7 +57,7 @@ def non_empty_group_list(db, app):
 
 @then('the new group list is equal to the old list with the added group')
 def verify_group_added(db, group_list, new_group):
-    old_groups = group_list()
+    old_groups = group_list
     new_groups = db.get_group_list()
     old_groups.append(new_group)
 

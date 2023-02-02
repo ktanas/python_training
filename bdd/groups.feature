@@ -10,6 +10,15 @@ Scenario Outline: Add new group
   | name2       | header2      | footer2      |
 
 
+Scenario: Modify a group
+  Given a non-empty group list
+  Given index of a random group from the list
+  When I modify <name>, <header> and <footer> of the chosen group
+  Then the new group list is equal to old group list with modified group
+
+  | name     | header     | footer     |
+  | new_name | new_header | new_footer |
+
 
 Scenario: Delete a group
   Given a non-empty group list
