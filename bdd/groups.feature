@@ -25,3 +25,4 @@ Scenario: Delete a group
   Given index of a random group from the list
   When I delete the group from the list
   Then the new group list is equal to old group list without the deleted group
+
