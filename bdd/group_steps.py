@@ -35,6 +35,7 @@ def modify_group_data(app, index, new_name, new_header, new_footer):
     group1.id = old_groups[index].id
 
     app.group.modify_group_by_index(index, group1)
+
     return app.group.get_group_list()
 
 
