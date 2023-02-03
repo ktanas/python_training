@@ -163,9 +163,9 @@ class ContactHelper:
                 lastname = cells[1].text
                 id = cells[0].find_element("tag name", "input").get_attribute("value")
                 all_phones = cells[5].text
-                print("all_phones="+str(all_phones))
+                # print("all_phones="+str(all_phones))
                 all_emails = cells[4].text
-                print("all_emails="+str(all_emails))
+                # print("all_emails="+str(all_emails))
                 address = cells[3].text
 
                 self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id,

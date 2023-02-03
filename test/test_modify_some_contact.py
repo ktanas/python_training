@@ -2,7 +2,7 @@ from model.contact import *
 from random import randrange
 
 
-def test_modify_first_contact(app):
+def test_modify_some_contact(app):
 
     if app.contact_data.count() == 0:
         # If list of contacts is empty, let us execute the set of methods used to create a new, empty contact

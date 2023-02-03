@@ -1,4 +1,5 @@
 from random import randrange
+from model.contact import Contact
 
 
 def test_delete_some_contact(app):
@@ -26,5 +27,5 @@ def test_delete_some_contact(app):
     assert len(new_contacts) == len(old_contacts) - 1
 
     old_contacts[index:index+1] = []
-    assert old_contacts == new_contacts
+    assert sorted(old_contacts, key=Contact.id_or_max) == sorted (new_contacts, key=Contact.id_or_max)
 

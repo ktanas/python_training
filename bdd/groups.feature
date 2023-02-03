@@ -16,6 +16,7 @@ Scenario: Modify a group
   When I modify <name>, <header> and <footer> of the chosen group
   Then the new group list is equal to old group list with modified group
 
+  Examples:
   | name     | header     | footer     |
   | new_name | new_header | new_footer |
 
