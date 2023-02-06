@@ -1,5 +1,5 @@
 from pytest_bdd import scenario
-from .group_steps import *
+from .contact_steps import *
 
 
 @scenario('contacts.feature', 'Add new contact')
