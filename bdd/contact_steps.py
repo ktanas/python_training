@@ -12,13 +12,14 @@ def new_contact(firstname, middlename, lastname, nickname):
     return Contact(firstname=firstname, middlename=middlename, lastname=lastname, nickname=nickname)
 
 
-@given('a list of contacts')
-def contact_list(db):
-    return db.get_contact_list()
+@given('a list of contacts', target_fixture='contact_list')
+def contact_list(app):
+    contact_list = app.contact_data.get_contact_list()
+    return contact_list
 
-@given('a non-empty list_of_contacts')
-def non_empty_contact_list(db, app):
-    if len(db.get_contact_list()) == 0:
+@given('a non-empty list of contacts', target_fixture='non_empty_contact_list')
+def non_empty_contact_list(app):
+    if len(app.contact_data.get_contact_list()) == 0:
 
         app.open_contact_home_page()
         app.go_to_new_contact_editor_page()
@@ -28,9 +29,11 @@ def non_empty_contact_list(db, app):
         app.contact_data.enter_contact_personal_data(con)
         app.contact_data.finalize_new_contact_addition()
 
-        return db.get_contact_list()
+        non_empty_contact_list = app.contact_data.get_contact_list()
+        return non_empty_contact_list
 
-@given('index of a random contact from the list')
+
+@given('index of a random contact from the list', target_fixture='non_empty_contact_list')
 def random_contact(non_empty_contact_list):
     return randrange(len(non_empty_contact_list))
 

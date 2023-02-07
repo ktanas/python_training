@@ -49,12 +49,6 @@ def verify_group_modified(app, non_empty_group_list, index):
     assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
 
 
-@given('a non-empty group list')
-def non_empty_group_list(db, app):
-    if len(db.get_group_list()) == 0:
-        app.group.create(Group(group_name="", header_name="", footer_name=""))
-        return db.get_group_list()
-
 @then('the new group list is equal to the old list with the added group')
 def verify_group_added(db, group_list, new_group):
     old_groups = group_list
