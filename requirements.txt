@@ -6,4 +6,4 @@ pony
 pymysql
 mysql-connector-python-rf
 lxml
-pytest-allure-adaptor
+#pytest-allure-adaptor

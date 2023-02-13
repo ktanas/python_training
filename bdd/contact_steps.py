@@ -33,7 +33,7 @@ def non_empty_contact_list(app):
         return non_empty_contact_list
 
 
-@given('index of a random contact from the list', target_fixture='non_empty_contact_list')
+@given('index of a random contact from the list', target_fixture='random_contact')
 def random_contact(non_empty_contact_list):
     return randrange(len(non_empty_contact_list))
 
