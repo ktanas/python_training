@@ -29,3 +29,4 @@ class AddressBook:
 
     def create_group(self, name, header, footer):
         self.fixture.group.create(Group(group_name=name, header_name=header, footer_name=footer))
+

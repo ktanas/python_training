@@ -6,6 +6,5 @@ pony
 pymysql
 mysql-connector-python-rf
 lxml
-#lxml-4.9.0-cp39-cp39-win_amd64.whl
 pytest-allure-adaptor
 robotframework
