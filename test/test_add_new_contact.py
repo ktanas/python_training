@@ -27,9 +27,9 @@ def test_add_new_contact(app, json_contacts):
         app.contact_data.enter_contact_personal_data(con)
         app.contact_data.finalize_new_contact_addition()
 
-    with pytest.allure.step('Then the new contact list is equal to the lod contact list with new contact'):
+    with pytest.allure.step('Then the new contact list is equal to the old contact list with new contact'):
         new_contacts = app.contact_data.get_contact_list()
 
         assert len(new_contacts) == len(old_contacts) + 1
         old_contacts.append(con)
-        assert sorted(old_contacts, key=Contact.id_or_max) == sorted (new_contacts, key=Contact.id_or_max)
+        assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)

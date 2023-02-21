@@ -88,24 +88,24 @@ def test_modify_first_group(app):
 
 def test_modify_group(app, group_name, header_name, footer_name):
 
-    with pytest.allure.step('Given a non-empty group list'):
-        if app.group.count() == 0:
-            app.group.create(Group(group_name="A", header_name="B", footer_name="C"))
+    # with pytest.allure.step('Given a non-empty group list'):
+    if app.group.count() == 0:
+        app.group.create(Group(group_name="A", header_name="B", footer_name="C"))
 
-        old_groups = app.group.get_group_list()
+    old_groups = app.group.get_group_list()
 
-    with pytest.allure.step('Given index of a random group from the list'):
-        index = randrange(len(old_groups))
+   # with pytest.allure.step('Given index of a random group from the list'):
+    index = randrange(len(old_groups))
 
-    with pytest.allure.step('When I modify <%s>, <%s> and <%s> of the chosen group' % group_name % header_name % footer_name):
-        group1 = Group(group_name=group_name, header_name=header_name, footer_name=footer_name)
-        group1.id = old_groups[index].id
+   # with pytest.allure.step('When I modify <%s>, <%s> and <%s> of the chosen group' % group_name % header_name % footer_name):
+    group1 = Group(group_name=group_name, header_name=header_name, footer_name=footer_name)
+    group1.id = old_groups[index].id
 
-        app.group.modify_group_by_index(index, group1)
+    app.group.modify_group_by_index(index, group1)
 
-    with pytest.allure.step('Then the new group list is equal to old group list with modified group'):
-        new_groups = app.group.get_group_list()
+   # with pytest.allure.step('Then the new group list is equal to old group list with modified group'):
+    new_groups = app.group.get_group_list()
 
-        assert len(new_groups) == len(old_groups)
-        old_groups[index] = new_groups[index]
-        assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
+    assert len(new_groups) == len(old_groups)
+    old_groups[index] = new_groups[index]
+    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
